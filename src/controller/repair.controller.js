@@ -3,13 +3,12 @@ const User = require("../models/user.model");
 
 exports.findRepair = async (req, res) => {
   try {
-
     const repair = await Repair.findAll({
-      where:{
+      where: {
         status: "pending",
-      }
+      },
     });
-   return  res.status(200).json({
+    return res.status(200).json({
       status: "sucess",
       repair,
     });
@@ -22,22 +21,19 @@ exports.findRepair = async (req, res) => {
   }
 };
 
-
- exports.createRepair = async (req, res) => {
-  try {
+exports.createRepair = async (req, res) => {
+  /*  try {
     const { userid, date } = req.body;
-    const user = await User.findOne({ where: { id: userid } });
-    if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    }
-    const repair = await Repair.create({ userid, date, status: "pending" });
+
+    const repair = await Repair.create({ userid, date });
+
     res.status(201).json(repair);
   } catch (error) {
     res.status(500).json({ message: "Error al crear la cita", error });
-  }
+  } */
 };
 
- exports.findRepairID = async (req, res) => {
+exports.findRepairID = async (req, res) => {
   try {
     const { id } = req.params;
     const repair = await Repair.findOne({
@@ -71,7 +67,6 @@ exports.updateRepair = async (req, res) => {
 };
 exports.deleteRepair = async (req, res) => {
   try {
-
     const { id } = req.params;
     const repair = await Repair.findOne({
       where: {
@@ -84,10 +79,9 @@ exports.deleteRepair = async (req, res) => {
     }
     repair.status = "cancelled";
     await repair.save();
-    res.status(200).json({ 
-      status:'cancelled',
-      message: "Reparación cancelada exitosamente" });
+    res.status(200).json({
+      status: "cancelled",
+      message: "Reparación cancelada exitosamente",
+    });
   } catch (error) {}
 };
-
-
