@@ -1,3 +1,4 @@
+require("dotenv").config();
 const app = require("./app");
 
 const { db } = require("./basedata/config");
@@ -10,6 +11,6 @@ db.sync(/* { force: true } */)
   .then(() => console.log("DataBase syncro"))
   .catch(() => console.log("error failed syncro 🤬"));
 
-app.listen(3000, () => {
-  console.log(`Port run server 😀`);
+app.listen(process.env.PORT, () => {
+  console.log(`Port run server 😀 ${process.env.PORT}`);
 });
