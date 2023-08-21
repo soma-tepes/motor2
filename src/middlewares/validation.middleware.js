@@ -1,6 +1,7 @@
 const { validationResult, body } = require("express-validator");
+const catchAsync = require("../utils/catchAsync");
 
-const validateFields = (req, res, next) => {
+const validateFields = catchAsync((req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -11,7 +12,7 @@ const validateFields = (req, res, next) => {
   }
 
   next();
-};
+});
 
 exports.createLoginValidation = [
   body("email")
